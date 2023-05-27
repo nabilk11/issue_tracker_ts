@@ -3,6 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import router from "./routes/auth.js";
 import multer from "multer";
+import auth from "./middleware/auth.js";
 
 // MONGOOSE DB CONNECTION
 
@@ -24,6 +25,11 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Issue Tracker");
 });
+
+// AUTH ROUTE
+app.get("/protected", auth, (req, res) => {
+  return res.status(200).json({ ...req.user._doc})
+})
 
 app.use("/api", router)
 

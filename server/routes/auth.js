@@ -3,9 +3,8 @@ dotenv.config({ path: "./config/config.env" });
 import { Router } from "express";
 import * as bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
-
 import { User } from "../models/User.js";
-// import * as keys from "../server/config.env";
+
 const router = Router();
 
 // Create / Register User
