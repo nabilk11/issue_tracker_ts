@@ -18,6 +18,9 @@ app.use(cors());
 
 
 // ROUTES
+app.get("/", (req, res) => {
+  res.send("Issue Tracker");
+});
 
 app.use("/api", router)
 
