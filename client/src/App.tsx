@@ -1,8 +1,10 @@
+import Body from "./components/Body";
+
 function App() {
   return (
-    <div>
+    <Body>
       <h1>Issue Tracker</h1>
-    </div>
+    </Body>
   );
 }
 
