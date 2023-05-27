@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import router from "./routes/auth.js";
 
 // MONGOOSE DB CONNECTION
 
@@ -14,10 +15,11 @@ app.use(express.json());
 app.use(morgan("tiny"));
 app.use(cors());
 
+
+
 // ROUTES
-app.get("/", (req, res) => {
-  res.send("Issue Tracker");
-});
+
+app.use("/api", router)
 
 // LISTENER
 
