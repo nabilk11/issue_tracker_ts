@@ -2,12 +2,8 @@ import * as dotenv from "dotenv";
 dotenv.config({ path: "./config/config.env" });
 import { Router } from "express";
 import * as bcrypt from "bcrypt";
-<<<<<<< HEAD
-import { json } from "express";
+import jwt from 'jsonwebtoken';
 
-=======
-import jsonwebtoken from 'jsonwebtoken';
->>>>>>> b04d3d6294c9e8118d9c34c1f252ab2299a7a75f
 import { User } from "../models/User.js";
 // import * as keys from "../server/config.env";
 const router = Router();
@@ -36,7 +32,6 @@ router.post("/register", async (req, res) => {
 });
 
 // Login User
-
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -52,7 +47,7 @@ router.post("/login", async (req, res) => {
       if (isPasswordCorrect){
         const { password, id, email, issues, projects } = user._doc;
         const payload = {  password, id, email, issues, projects };
-        const token = jsonwebtoken.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: 3600 })
+        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: 3600 })
 
         const userFound = { ...user._doc }
 
