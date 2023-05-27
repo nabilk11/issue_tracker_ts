@@ -9,9 +9,9 @@ const DB_URL =
 // mongoose.set("strictQuery", true);
 
 const DB_CONNECT = async () =>
-mongoose
-  .connect(DB_URL)
-  .then(() => console.log(`MongoDB is Connected!`))
-  .catch((err) => console.log(`DB Error: ${err}`));
+  mongoose
+    .connect(DB_URL)
+    .then(() => console.log(`MongoDB is Connected!`))
+    .catch((err) => console.log(`DB Error: ${err}`));
 
-export default DB_CONNECT
+export default DB_CONNECT;

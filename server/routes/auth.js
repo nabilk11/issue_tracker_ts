@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config({ path: "./config/config.env" });
 import { Router } from "express";
 import * as bcrypt from "bcrypt";
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 import { User } from "../models/User.js";
 
 const router = Router();
@@ -36,36 +36,34 @@ router.post("/login", async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
-    if (!user)
-      return res.status(400).json({ error: "User does not exist!" });
+    if (!user) return res.status(400).json({ error: "User does not exist!" });
 
-      const isPasswordCorrect = await bcrypt.compare(password, user.password)
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
-      // ADD VALIDATIONS
+    // ADD VALIDATIONS
 
-      if (isPasswordCorrect){
-        const { password, id, email, issues, projects } = user._doc;
-        const payload = {  password, id, email, issues, projects };
-        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: 3600 })
+    if (isPasswordCorrect) {
+      const { password, id, email, issues, projects } = user._doc;
+      const payload = { password, id, email, issues, projects };
+      const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
+        expiresIn: 3600,
+      });
 
-        const userFound = { ...user._doc }
+      const userFound = { ...user._doc };
 
-        return res.status(200).json({
-            success: true,
-            token, 
-            userFound
-            // token: "Bearer " + token
-          });
-        
-      } else {
-        return res.status(400).json({ error: "Incorrect Password!"});
-      }
-
+      return res.status(200).json({
+        success: true,
+        token,
+        userFound,
+        // token: "Bearer " + token
+      });
+    } else {
+      return res.status(400).json({ error: "Incorrect Password!" });
+    }
   } catch (err) {
     console.log(`${err}`);
     return res.status(500).json({ error: err.message });
   }
-
-})
+});
 
 export default router;

@@ -1,8 +1,11 @@
+import * as dotenv from "dotenv";
+dotenv.config({ path: "./config/config.env" });
+
 import jwt from "jsonwebtoken";
 
 import { User } from "../models/User.js";
 
-export default (req, res, next) => {
+export default async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (authHeader) {
@@ -15,7 +18,7 @@ export default (req, res, next) => {
       }
 
       try {
-        const foundUser = await User.findOne({ _id: payload._id });
+        const foundUser = await User.findOne({ email: payload.email });
 
         req.user = foundUser;
         next();
@@ -24,6 +27,6 @@ export default (req, res, next) => {
       }
     });
   } else {
-    return res.status(403).json({ error: "Forbidden!" })
+    return res.status(403).json({ error: "Forbidden!" });
   }
 };
