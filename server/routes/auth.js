@@ -2,6 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config({ path: "./config/config.env" });
 import { Router } from "express";
 import * as bcrypt from "bcrypt";
+import { json } from 'express';
 
 import { User } from "../models/User.js";
 
@@ -13,15 +14,15 @@ router.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
 
   // Add Validation Steps
-
+  debugger
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser)
       return res.status(400).json({ error: "You already have an account!" });
 
-    
+    debugger
     const hashedPassword = await bcrypt.hash(password, 10);
-
+    debugger
     const newUser = new User({ name, email, password: hashedPassword });
 
     const result = await newUser.save();

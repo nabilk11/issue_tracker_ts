@@ -2,21 +2,24 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import router from "./routes/auth.js";
+import multer from "multer";
 
 // MONGOOSE DB CONNECTION
 
 import DB_CONNECT from "./config/db.js";
 
 const app = express();
+const upload = multer();
+app.use(upload.array());
 
 // MIDDLEWARE
 
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 
-
-
+app.use(express.json());
 // ROUTES
 
 app.use("/api", router)
