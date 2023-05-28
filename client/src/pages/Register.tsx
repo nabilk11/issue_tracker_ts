@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FC, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 
 interface RegisterFormData {
@@ -8,7 +8,7 @@ interface RegisterFormData {
   confirmPassword: string;
 }
 
-const Register: React.FC<RegisterFormData> = () => {
+const Register: FC<RegisterFormData> = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,12 +16,12 @@ const Register: React.FC<RegisterFormData> = () => {
     confirmPassword: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (

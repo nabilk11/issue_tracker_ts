@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FC, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 
 interface LoginFormData {
@@ -6,20 +6,20 @@ interface LoginFormData {
   password: string;
 }
 
-const Login: React.FC<LoginFormData> = () => {
+const Login: FC<LoginFormData> = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   // LOGIN CALL WILL BE MOVED TO CONTEXT API
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
