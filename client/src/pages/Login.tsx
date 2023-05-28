@@ -1,5 +1,13 @@
-import React, { useState, FC, ChangeEvent, FormEvent } from "react";
+import React, {
+  useState,
+  FC,
+  ChangeEvent,
+  FormEvent,
+  useContext,
+  useEffect,
+} from "react";
 import axios from "axios";
+import AuthContext from "../context/AuthContext";
 
 interface LoginFormData {
   email: string;
@@ -11,6 +19,13 @@ const Login: FC<LoginFormData> = () => {
     email: "",
     password: "",
   });
+
+  const authContext = useContext(AuthContext);
+  // const user = authContext?.user
+  // const loginCall = authContext?.loginCall
+  // const setUser = authContext?.setUser
+  // const message = authContext?.message
+  // const setMessage = authContext?.setMessage
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -25,24 +40,18 @@ const Login: FC<LoginFormData> = () => {
     if (!formData.email || !formData.password) {
       alert("Missing fields!"); // change later for better alerts
     }
-
-    // ADD MORE VALIDATIONS
-    else {
-      try {
-        const credentials = {
-          email: formData.email,
-          password: formData.password,
-        };
-
-        // MUST RECOVER TOKEN AND ACCESS PROTECTED ROUTES
-        const result = await axios.post("https://localhost:8000/api/login", credentials);
-
-        
-      } catch (err) {
-        console.log(err);
-      }
-    }
+    authContext?.loginCall(formData);
   };
+
+  // Resetting Messages
+
+  useEffect(() => {
+    if (authContext?.message) {
+      console.log(authContext.message);
+      authContext.setMessage("");
+    }
+    
+  }, [authContext?.message, authContext?.setMessage, authContext]);
 
   return (
     <div className="container">

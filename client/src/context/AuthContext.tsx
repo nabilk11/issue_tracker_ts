@@ -28,8 +28,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: FC<ContextProps> = ({ children }) => {
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState("");
-  // const [isLoggedIn, setIsLoggedIn] = useState(null)
 
+  
   useEffect(() => {
     isLoggedIn();
   }, []);
