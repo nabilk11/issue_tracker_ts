@@ -6,12 +6,13 @@ import React, {
   useContext,
   useEffect,
 } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../context/AuthContext";
 
 interface LoginFormData {
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
 }
 
 const Login: FC<LoginFormData> = () => {
@@ -82,6 +83,11 @@ const Login: FC<LoginFormData> = () => {
           </div>
           <button type="submit">Login</button>
         </form>
+        <div className="lower">
+          <span>
+            Don't have an account? <Link to={"/register"}>Register Here!</Link>{" "}
+          </span>
+        </div>
       </div>
     </div>
   );

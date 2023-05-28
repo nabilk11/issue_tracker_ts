@@ -8,12 +8,13 @@ import React, {
 } from "react";
 import axios from "axios";
 import AuthContext from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 interface RegisterFormData {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
+  name?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
 }
 
 const Register: FC<RegisterFormData> = () => {
@@ -101,6 +102,9 @@ const Register: FC<RegisterFormData> = () => {
           </div>
           <button type="submit">Register</button>
         </form>
+        <div className="lower">
+          <span>Already have an account? <Link to={'/login'}>Login Here!</Link> </span>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import AuthContext from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const Navbar = (): JSX.Element => {
   const authContext = useContext(AuthContext);
@@ -13,35 +14,35 @@ const Navbar = (): JSX.Element => {
       <div className="container-fluid">
         {/* change these to links with react-router-dom */}
         <div className="left-side">
-          <a className="navbar-brand">Issue Tracker</a>
+          <Link to={"/"} style={{textDecoration: 'none'}} className="navbar-brand">Issue Tracker</Link>
         </div>
 
         <div className="right-side">
           <ul className="nav-list">
             <li className="nav-item">
-              <a href="" className="nav-link">
-                Home
-              </a>
+              <Link to={"/dashboard"} style={{textDecoration: 'none'}} className="nav-link">
+                Dashboard
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="" className="nav-link">
+              <Link to={"/projects"} style={{textDecoration: 'none'}} className="nav-link">
                 Projects
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="" className="nav-link">
+              <Link to={"/issues"} style={{textDecoration: 'none'}} className="nav-link">
                 Issues
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="" className="nav-link">
+              <Link to={"/login"} style={{textDecoration: 'none'}} className="nav-link">
                 Login
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="" className="nav-link">
+              <Link to={"/register"} style={{textDecoration: 'none'}} className="nav-link">
                 Register
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
               {authContext?.user === null ? (
