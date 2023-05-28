@@ -4,6 +4,7 @@ import { Router } from "express";
 import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "../models/User.js";
+import auth from "../middleware/auth.js";
 
 const router = Router();
 
@@ -28,6 +29,11 @@ router.post("/register", async (req, res) => {
     console.log(`${err}`);
     return res.status(500).json({ error: err.message });
   }
+});
+
+// Get User
+router.get("/user", auth, async (req, res) => {
+  return res.status(200).json({ ...req.user._doc });
 });
 
 // Login User
