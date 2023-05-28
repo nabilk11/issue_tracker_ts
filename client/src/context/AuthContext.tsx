@@ -10,6 +10,7 @@ import axios from "axios";
 interface AuthContextType {
   // isLoggedIn: boolean;
   loginCall: (credentials: any) => Promise<void>;
+  registerCall: (credentials: any) => Promise<void>;
   // logout: () => void;
   user: null; // Replace `User` with the actual type of `user`
   setUser: React.Dispatch<React.SetStateAction<null>>;
@@ -29,7 +30,6 @@ export const AuthProvider: FC<ContextProps> = ({ children }) => {
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState("");
 
-  
   useEffect(() => {
     isLoggedIn();
   }, []);
@@ -68,9 +68,36 @@ export const AuthProvider: FC<ContextProps> = ({ children }) => {
     }
   };
 
+  const registerCall = async (credentials: any) => {
+    try {
+      const res = await axios.post("https://localhost:8000/api/register", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        name: credentials.name,
+        email: credentials.email,
+        password: credentials.password,
+      });
+
+      // new user should be res.data
+      if (res.status === 201) {
+        const newUser = {
+          email: credentials.email,
+          password: credentials.password,
+        };
+
+        loginCall(newUser);
+        
+      }
+    } catch (err) {
+      //
+    }
+  };
+
   const authContextValue: AuthContextType = {
     // isLoggedIn: false,
     loginCall,
+    registerCall,
     user,
     setUser,
     message,

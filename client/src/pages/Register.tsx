@@ -1,5 +1,13 @@
-import React, { useState, FC, ChangeEvent, FormEvent } from "react";
+import React, {
+  useState,
+  FC,
+  ChangeEvent,
+  FormEvent,
+  useContext,
+  useEffect,
+} from "react";
 import axios from "axios";
+import AuthContext from "../context/AuthContext";
 
 interface RegisterFormData {
   name: string;
@@ -15,6 +23,8 @@ const Register: FC<RegisterFormData> = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const authContext = useContext(AuthContext);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -35,20 +45,9 @@ const Register: FC<RegisterFormData> = () => {
 
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!"); // change later for some messaging popup
-    } else {
-      try {
-        const newUser = {
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        };
-        await axios.post("https://localhost:8000/api/register", newUser);
-
-        // add login call and login user
-      } catch (err) {
-        console.log(err);
-      }
     }
+    authContext?.registerCall(formData);
+    // add login call and login user
   };
 
   return (
