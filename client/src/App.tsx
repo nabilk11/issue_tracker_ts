@@ -1,10 +1,13 @@
 import Body from "./components/Body";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
-    <Body>
-      <h1>Issue Tracker</h1>
-    </Body>
+    <AuthProvider>
+      <Body>
+        <h1>Issue Tracker</h1>
+      </Body>
+    </AuthProvider>
   );
 }
 

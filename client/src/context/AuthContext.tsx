@@ -11,6 +11,7 @@ interface AuthContextType {
   // isLoggedIn: boolean;
   loginCall: (credentials: any) => Promise<void>;
   registerCall: (credentials: any) => Promise<void>;
+  logoutUser: () => void;
   // logout: () => void;
   user: null; // Replace `User` with the actual type of `user`
   setUser: React.Dispatch<React.SetStateAction<null>>;
@@ -34,6 +35,7 @@ export const AuthProvider: FC<ContextProps> = ({ children }) => {
     isLoggedIn();
   }, []);
 
+  // GET USER
   const isLoggedIn = async () => {
     try {
       const res = await axios.get("https://localhost:8000/api/user", {
@@ -47,7 +49,15 @@ export const AuthProvider: FC<ContextProps> = ({ children }) => {
       //
     }
   };
-  // LOGIN USER
+
+  // LOGOUT HANDLER
+  const logoutUser = () => {
+    localStorage.removeItem("userToken");
+    setUser(null);
+    setMessage("You have been logged out! Scram Nigga!");
+  };
+
+  // LOGIN HANDLER
   const loginCall = async (credentials: any) => {
     try {
       const res = await axios.post("https://localhost:8000/api/login", {
@@ -68,6 +78,7 @@ export const AuthProvider: FC<ContextProps> = ({ children }) => {
     }
   };
 
+  // REGISTER HANDLER
   const registerCall = async (credentials: any) => {
     try {
       const res = await axios.post("https://localhost:8000/api/register", {
@@ -87,7 +98,6 @@ export const AuthProvider: FC<ContextProps> = ({ children }) => {
         };
 
         loginCall(newUser);
-        
       }
     } catch (err) {
       //
@@ -98,6 +108,7 @@ export const AuthProvider: FC<ContextProps> = ({ children }) => {
     // isLoggedIn: false,
     loginCall,
     registerCall,
+    logoutUser,
     user,
     setUser,
     message,

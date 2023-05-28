@@ -50,7 +50,6 @@ const Login: FC<LoginFormData> = () => {
       console.log(authContext.message);
       authContext.setMessage("");
     }
-    
   }, [authContext?.message, authContext?.setMessage, authContext]);
 
   return (
