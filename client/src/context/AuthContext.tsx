@@ -29,6 +29,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: FC<ContextProps> = ({ children }) => {
   const [user, setUser] = useState(null);
+  // const [currentUser, setCurrentUser] = useState(null);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -53,6 +54,7 @@ export const AuthProvider: FC<ContextProps> = ({ children }) => {
   // LOGOUT HANDLER
   const logoutUser = () => {
     localStorage.removeItem("userToken");
+    localStorage.removeItem("currentUser");
     setUser(null);
     setMessage("You have been logged out! Scram Nigga!");
   };
@@ -68,14 +70,20 @@ export const AuthProvider: FC<ContextProps> = ({ children }) => {
         password: credentials.password,
       });
 
-      console.log(res);
-      console.log(res);
+      // SET MESSAGE
       setMessage("Success!");
-      
+
       // SET TOKEN
-      // localStorage.setItem("userToken", res.data);
+      localStorage.setItem("userToken", res.data.token);
+
+      // SET CURRENT USER
+      const userString = JSON.stringify(res.data.userFound);
+      localStorage.setItem("currentUser", userString);
+
+      window.location.reload()
+
     } catch (error: any) {
-      setMessage(error.response);
+      setMessage(error.response.data);
     }
   };
 

@@ -6,7 +6,7 @@ import React, {
   useContext,
   useEffect,
 } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../context/AuthContext";
 
@@ -22,11 +22,8 @@ const Login: FC<LoginFormData> = () => {
   });
 
   const authContext = useContext(AuthContext);
-  // const user = authContext?.user
-  // const loginCall = authContext?.loginCall
-  // const setUser = authContext?.setUser
-  // const message = authContext?.message
-  // const setMessage = authContext?.setMessage
+
+  const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -42,6 +39,8 @@ const Login: FC<LoginFormData> = () => {
       alert("Missing fields!"); // change later for better alerts
     }
     authContext?.loginCall(formData);
+
+    navigate("/dashboard");
   };
 
   // Resetting Messages
