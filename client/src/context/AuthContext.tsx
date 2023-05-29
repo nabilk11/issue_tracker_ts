@@ -38,7 +38,7 @@ export const AuthProvider: FC<ContextProps> = ({ children }) => {
   // GET USER
   const isLoggedIn = async () => {
     try {
-      const res = await axios.get("https://localhost:8000/api/user", {
+      const res = await axios.get("http://localhost:8000/api/user", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("userToken")}`,
@@ -60,28 +60,29 @@ export const AuthProvider: FC<ContextProps> = ({ children }) => {
   // LOGIN HANDLER
   const loginCall = async (credentials: any) => {
     try {
-      const res = await axios.post("https://localhost:8000/api/login", {
+      const res = await axios.post("http://localhost:8000/api/login", {
         headers: {
           "Content-Type": "application/json",
         },
         email: credentials.email,
         password: credentials.password,
       });
-      console.log(res);
-      console.log(res.data);
-      setMessage("Success!");
 
+      console.log(res);
+      console.log(res);
+      setMessage("Success!");
+      
       // SET TOKEN
-      localStorage.setItem("userToken", res.data.token);
+      // localStorage.setItem("userToken", res.data);
     } catch (error: any) {
-      setMessage(error.response.data.error);
+      setMessage(error.response);
     }
   };
 
   // REGISTER HANDLER
   const registerCall = async (credentials: any) => {
     try {
-      const res = await axios.post("https://localhost:8000/api/register", {
+      const res = await axios.post("http://localhost:8000/api/register", {
         headers: {
           "Content-Type": "application/json",
         },

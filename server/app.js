@@ -28,10 +28,11 @@ app.get("/", (req, res) => {
 
 // AUTH ROUTE
 app.get("/protected", auth, (req, res) => {
-  return res.status(200).json({ ...req.user._doc });
-});
 
-app.use("/api", router);
+  return res.status(200).json({ ...req.user._doc})
+})
+
+app.use("/api", router)
 
 // LISTENER
 
