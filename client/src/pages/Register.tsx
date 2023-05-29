@@ -75,6 +75,7 @@ const Register: FC<RegisterFormData> = () => {
             <input
               type="email"
               id="email"
+              name="email"
               value={formData.email}
               onChange={handleChange}
               required
@@ -85,6 +86,7 @@ const Register: FC<RegisterFormData> = () => {
             <input
               type="password"
               id="password"
+              name="password"
               value={formData.password}
               onChange={handleChange}
               required
@@ -95,6 +97,7 @@ const Register: FC<RegisterFormData> = () => {
             <input
               type="confirmPassword"
               id="confirmPassword"
+              name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
               required
