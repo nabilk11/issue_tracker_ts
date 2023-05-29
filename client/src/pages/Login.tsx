@@ -30,7 +30,6 @@ const Login: FC<LoginFormData> = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    debugger
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
