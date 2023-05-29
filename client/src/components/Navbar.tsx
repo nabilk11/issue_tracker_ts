@@ -14,43 +14,69 @@ const Navbar = (): JSX.Element => {
       <div className="container-fluid">
         {/* change these to links with react-router-dom */}
         <div className="left-side">
-          <Link to={"/"} style={{textDecoration: 'none'}} className="navbar-brand">Issue Tracker</Link>
+          <Link
+            to={"/"}
+            style={{ textDecoration: "none" }}
+            className="navbar-brand"
+          >
+            Issue Tracker
+          </Link>
         </div>
 
         <div className="right-side">
           <ul className="nav-list">
             <li className="nav-item">
-              <Link to={"/dashboard"} style={{textDecoration: 'none'}} className="nav-link">
+              <Link
+                to={"/dashboard"}
+                style={{ textDecoration: "none" }}
+                className="nav-link"
+              >
                 Dashboard
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/projects"} style={{textDecoration: 'none'}} className="nav-link">
+              <Link
+                to={"/projects"}
+                style={{ textDecoration: "none" }}
+                className="nav-link"
+              >
                 Projects
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/issues"} style={{textDecoration: 'none'}} className="nav-link">
+              <Link
+                to={"/issues"}
+                style={{ textDecoration: "none" }}
+                className="nav-link"
+              >
                 Issues
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/login"} style={{textDecoration: 'none'}} className="nav-link">
+              <Link
+                to={"/login"}
+                style={{ textDecoration: "none" }}
+                className="nav-link"
+              >
                 Login
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/register"} style={{textDecoration: 'none'}} className="nav-link">
+              <Link
+                to={"/register"}
+                style={{ textDecoration: "none" }}
+                className="nav-link"
+              >
                 Register
               </Link>
             </li>
-            <li className="nav-item">
-              {authContext?.user === null ? (
+            {authContext?.user ? (
+              <li className="nav-item">
                 <button onClick={logout}>Log Out</button>
-              ) : (
-                <></>
-              )}
-            </li>
+              </li>
+            ) : (
+              <></>
+            )}
           </ul>
         </div>
       </div>
