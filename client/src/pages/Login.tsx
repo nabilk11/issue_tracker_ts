@@ -30,7 +30,7 @@ const Login: FC<LoginFormData> = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setFormData({ ...formData, [name]: value });
   };
 
   // LOGIN CALL WILL BE MOVED TO CONTEXT API
@@ -65,6 +65,7 @@ const Login: FC<LoginFormData> = () => {
             <label htmlFor="email">Email:</label>
             <input
               type="email"
+              name="email"
               id="email"
               value={formData.email}
               onChange={handleChange}
@@ -76,6 +77,7 @@ const Login: FC<LoginFormData> = () => {
             <input
               type="password"
               id="password"
+              name="password"
               value={formData.password}
               onChange={handleChange}
               required
