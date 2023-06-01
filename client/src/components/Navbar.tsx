@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import { Link } from "react-router-dom";
-
+import './Navbar.css'
 const Navbar = (): JSX.Element => {
   const authContext = useContext(AuthContext);
 
@@ -10,8 +10,8 @@ const Navbar = (): JSX.Element => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div className="container-fluid">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary display: flex">
+      <div id="navbar" className="container-fluid">
         {/* change these to links with react-router-dom */}
         <div className="left-side">
           <Link
@@ -23,7 +23,7 @@ const Navbar = (): JSX.Element => {
           </Link>
         </div>
 
-        <div className="right-side">
+        {/* <div className="right-side"> */}
           <ul className="nav-list">
             <li className="nav-item">
               <Link
@@ -78,7 +78,7 @@ const Navbar = (): JSX.Element => {
               <></>
             )}
           </ul>
-        </div>
+        {/* </div> */}
       </div>
     </nav>
   );

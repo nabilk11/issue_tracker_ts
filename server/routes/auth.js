@@ -5,6 +5,8 @@ import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "../models/User.js";
 import auth from "../middleware/auth.js";
+// import { Issue } from "../models/Issue.js";
+// import { Project } from "../models/Project.js";
 
 const router = Router();
 
