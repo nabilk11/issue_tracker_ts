@@ -6,7 +6,9 @@ import Issue from '../../models/Issue.js';
 // Get All Projects
 router.get('/', async (req, res) => {
   try {
-    const projects = await Project.find().populate('users').populate('admin').exec();
+    debugger
+    const projects = await Project.find().populate('users').populate('admins').exec();
+    debugger
     return res.status(200).json(projects);
   } catch (err) {
     console.log(`${err}`);
