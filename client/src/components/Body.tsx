@@ -10,6 +10,7 @@ const Body: FC<BodyProps> = ({ children }) => {
     <div className="app">
       <Navbar />
       <main className="container">{children}</main>
+      <div></div>
     </div>
   );
 };
