@@ -1,5 +1,5 @@
 import React, { ReactNode, FC } from "react";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar/Navbar";
 
 type BodyProps = {
   children: ReactNode;

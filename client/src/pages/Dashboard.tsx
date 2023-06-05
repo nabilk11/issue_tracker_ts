@@ -1,17 +1,15 @@
-import React, {useState, useEffect, FC } from "react";
+import React, { useState, useEffect, FC } from "react";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-
-const Dashboard:FC = () => {
-
+const Dashboard: FC = () => {
   const [projects, setProjects] = useState<any[]>([]);
   const [issues, setIssues] = useState<any[]>([]);
-  
-  useEffect(()=> {
+
+  useEffect(() => {
     getProjects();
     getIssues();
-  }, [])
+  }, []);
 
   const getProjects = async () => {
     try {
@@ -19,15 +17,15 @@ const Dashboard:FC = () => {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        } 
-        })
-        setProjects(res.data)
-        console.log("Projects")
-        console.log(res.data)
+        },
+      });
+      setProjects(res.data);
+      console.log("Projects");
+      console.log(res.data);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   const getIssues = async () => {
     try {
@@ -35,15 +33,15 @@ const Dashboard:FC = () => {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        } 
-      })
-      setIssues(res.data)
-      console.log("Issues")
-      console.log(res.data)
+        },
+      });
+      setIssues(res.data);
+      console.log("Issues");
+      console.log(res.data);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   // const {}
   return (
@@ -51,25 +49,38 @@ const Dashboard:FC = () => {
       This is Da Dashboard Container
       <div className="my-issues"> My Issues </div>
       <ul>
-        {issues.map(issue => (
+        {issues.map((issue) => (
           <div className="issueContainer">
-            <Link to={`/issues/${issue._id}`} style={{ textDecoration: "none" }} className="issue-link" > {issue.title}</Link>
+            <Link
+              to={`/issues/${issue._id}`}
+              style={{ textDecoration: "none" }}
+              className="issue-link"
+            >
+              {" "}
+              {issue.title}
+            </Link>
           </div>
         ))}
       </ul>
-      <div className="my-projects"> Projects 
+      <div className="my-projects">
+        {" "}
+        Projects
         <ul>
-          {projects.map(project => (
+          {projects.map((project) => (
             <div className="projectContainer">
-              <Link to={`/projects/${project._id}`} style={{ textDecoration: "none" }} className="project-link" >{project.name} </Link>
+              <Link
+                to={`/projects/${project._id}`}
+                style={{ textDecoration: "none" }}
+                className="project-link"
+              >
+                {project.name}{" "}
+              </Link>
             </div>
-          )
-
-          )}
+          ))}
         </ul>
       </div>
     </div>
-  )
+  );
 };
 
 export default Dashboard;
