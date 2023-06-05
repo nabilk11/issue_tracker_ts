@@ -9,7 +9,6 @@ const router = Router();
 // Get All Projects
 router.get("/", async (req, res) => {
   try {
-  
     const projects = await Project.find()
       .populate("users")
       .populate("admins")

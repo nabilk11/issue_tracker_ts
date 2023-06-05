@@ -4,7 +4,7 @@ import cors from "cors";
 import router from "./routes/auth.js";
 import multer from "multer";
 import auth from "./middleware/auth.js";
-// import 
+// import
 // MONGOOSE DB CONNECTION
 
 import DB_CONNECT from "./config/db.js";
@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
   res.send("Issue Tracker");
 });
 
-// MODELS 
+// MODELS
 import { User } from "./models/User.js";
 // import { Project } from "./models/Project.js";
 // import { Issue } from "./models/Issue.js";
@@ -40,11 +40,10 @@ app.use("/api/issues", issueRoutes);
 
 // AUTH ROUTE
 app.get("/protected", auth, (req, res) => {
+  return res.status(200).json({ ...req.user._doc });
+});
 
-  return res.status(200).json({ ...req.user._doc})
-})
-
-app.use("/api", router)
+app.use("/api", router);
 
 // LISTENER
 
