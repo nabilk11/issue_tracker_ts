@@ -43,14 +43,13 @@ const Dashboard: FC = () => {
     }
   };
 
-  // const {}
   return (
     <div className="dashboard-container">
       This is Da Dashboard Container
       <div className="my-issues"> My Issues </div>
       <ul>
         {issues.map((issue) => (
-          <div className="issueContainer">
+          <div key={issue._id} className="issueContainer">
             <Link
               to={`/issues/${issue._id}`}
               style={{ textDecoration: "none" }}

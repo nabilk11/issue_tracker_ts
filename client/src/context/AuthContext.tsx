@@ -56,7 +56,7 @@ export const AuthProvider: FC<ContextProps> = ({ children }) => {
     localStorage.removeItem("userToken");
     localStorage.removeItem("currentUser");
     setUser(null);
-    setMessage("You have been logged out! Scram Nigga!");
+    setMessage("You have been logged out! Scram!");
   };
 
   // LOGIN HANDLER
@@ -80,8 +80,7 @@ export const AuthProvider: FC<ContextProps> = ({ children }) => {
       const userString = JSON.stringify(res.data.userFound);
       localStorage.setItem("currentUser", userString);
 
-      window.location.reload()
-
+      window.location.reload();
     } catch (error: any) {
       setMessage(error.response.data);
     }

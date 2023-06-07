@@ -1,42 +1,42 @@
 .issues-table {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 1rem;
-  }
-  
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    color: antiquewhite;
-  }
-  
-  th,
-  td {
-    border: 1px solid #ffffff;
-    text-align: left;
-    padding: 8px;
-    font-size: 32px;
-  }
-  
-  th {
-    background-color: #646cff;
-  }
-  
-  td {
-    background-color: #9ca0f0;
-  }
-  
-  form {
-    display: flex;
-    gap: 5px;
-  }
-  
-  form td:last-child {
-    display: flex;
-    justify-content: space-evenly;
-  }
-  
-  form * {
-    font-size: 28px;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  color: antiquewhite;
+}
+
+th,
+td {
+  border: 1px solid #ffffff;
+  text-align: left;
+  padding: 8px;
+  font-size: 32px;
+}
+
+th {
+  background-color: #646cff;
+}
+
+td {
+  background-color: #9ca0f0;
+}
+
+form {
+  display: flex;
+  gap: 5px;
+}
+
+form td:last-child {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+form * {
+  font-size: 28px;
+}
