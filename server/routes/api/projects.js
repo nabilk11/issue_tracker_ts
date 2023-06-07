@@ -23,13 +23,24 @@ router.get("/", async (req, res) => {
 });
 
 // Get Project by ID
-router.get("/:id", async (req, res) => {});
+router.get("/:id", async (req, res) => {
+  try {
+    const projectFound = await Project.findById(req.params.id);
+    return res.status(200).json(projectFound);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
 
-router.post("/", async (req, res) => {
-  const { name, description, users, admin, issues } = req.body;
+// Create New Project
+router.post("/create", async (req, res) => {
+  // WE NEED TO EDIT THE PROJECT MODEL FIELDS
+  // const { name, description, users, admin, issues } = req.body;
+  const { name } = req.body;
 
   try {
-    const newProject = new Project({ name, description, users, admin, issues });
+    // const newProject = new Project({ name, description, users, admin, issues });
+    const newProject = new Project({ name });
     const result = await newProject.save();
     return res.status(201).json({ ...result._doc });
   } catch (err) {
