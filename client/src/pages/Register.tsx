@@ -106,7 +106,9 @@ const Register: FC<RegisterFormData> = () => {
           <button type="submit">Register</button>
         </form>
         <div className="lower">
-          <span>Already have an account? <Link to={'/login'}>Login Here!</Link> </span>
+          <span>
+            Already have an account? <Link to={"/login"}>Login Here!</Link>{" "}
+          </span>
         </div>
       </div>
     </div>
