@@ -7,14 +7,11 @@ type project = {
   _id: string;
 };
 
-type setProject = {
-  name: string;
-};
 
 export const AddIssueForm: FC = () => {
   // GET CURRENT USER's ID - Might put inside a useEffect Hook
-  const loggedInUser = localStorage.getItem("currentUser");
-  const reportingUser = JSON.parse(loggedInUser);
+  const loggedInUserString = localStorage.getItem("currentUser");
+  const reportingUser = JSON.parse(loggedInUserString);
 
   // CREATE ISSUE FORMDATA
   const [formData, setFormData] = useState({
@@ -28,6 +25,9 @@ export const AddIssueForm: FC = () => {
 
   // ALL EXISTING PROJECTS ARRAY
   const [projects, setProjects] = useState<project[]>([]);
+
+  // NEW PROJECT STATE
+  const [newProject, setNewProject] = useState<unknown>("");
 
   // PROJECT FIELD SHO/ HIDE STATE
   const [showOption, setShowOption] = useState(false);
@@ -71,7 +71,15 @@ export const AddIssueForm: FC = () => {
       <h2>Add New Issue</h2>
       <form action="">
         <label htmlFor="project">Which project is this issue part of?</label>
-        <select id="project" name="project">
+        <select
+          id="project"
+          name="project"
+          onChange={(e) => {
+            setNewProject(e.target.value);
+            if (e.target.value == "new") setShowOption(true);
+            else setShowOption(false);
+          }}
+        >
           {projects.map((proj) => (
             <option key={proj._id} value={formData.project}>
               {proj.name}
