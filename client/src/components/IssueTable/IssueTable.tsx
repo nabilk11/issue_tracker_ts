@@ -26,7 +26,7 @@ const IssueTable: FC = ({ issues }) => {
               <td>{issue._id}</td>
               {/* REMOVE TERNARY ONCE WE FIX DB AND WORKFLOW */}
               {issue.project ? (
-                <td>{issue.project?.name}</td>
+                <td>{issue.project.name}</td>
               ) : (
                 <td>Project XXX</td>
               )}
