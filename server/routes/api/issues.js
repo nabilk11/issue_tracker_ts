@@ -91,4 +91,53 @@ router.post("/", async (req, res) => {
   }
 });
 
+
+
+// NEW TEST CREATE ROUTE
+// Create Issue
+// router.post("/create", async (req, res) => {
+//   const { description, status, priority, project, title, reportedUser } =
+//     req.body;
+
+//   try {
+//     const existingProject = await Project.findOne({ name: project });
+//     if (existingProject) {
+//       const newIssue = new Issue({
+//         title,
+//         description,
+//         project: existingProject._id,
+//         reportedUser,
+//         status,
+//         priority,
+//       });
+//       const result = await newIssue.save();
+
+//       existingProject.issues.push(result);
+//       existingProject.save();
+
+//       return res.status(201).json({ ...result._doc });
+//     } else {
+//       const newProject = new Project({ name: project });
+
+//       const newIssue = new Issue({
+//         title,
+//         description,
+//         project: newProject._id,
+//         reportedUser,
+//         status,
+//         priority,
+//       });
+
+//       const result = await newIssue.save();
+//       newProject.issues.push(result);
+
+//       const projectNew = await newProject.save();
+//       return res.status(201).json({ ...result._doc });
+//     }
+//   } catch (err) {
+//     console.log(`${err}`);
+//     return res.status(500).json({ error: err.message });
+//   }
+// });
+
 export default router;

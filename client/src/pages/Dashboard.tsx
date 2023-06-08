@@ -77,7 +77,7 @@ const Dashboard: FC = () => {
         Projects
         <ul>
           {projects.map((project) => (
-            <div className="projectContainer">
+            <div key={project._id} className="projectContainer">
               <Link
                 to={`/projects/${project._id}`}
                 style={{ textDecoration: "none" }}
