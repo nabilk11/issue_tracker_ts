@@ -7,7 +7,6 @@ type project = {
   _id: string;
 };
 
-
 export const AddIssueForm: FC = () => {
   // GET CURRENT USER's ID - Might put inside a useEffect Hook
   const loggedInUserString = localStorage.getItem("currentUser");
@@ -34,7 +33,10 @@ export const AddIssueForm: FC = () => {
 
   // HANDLE CHANGE
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+    e:
+      | ChangeEvent<HTMLInputElement>
+      | ChangeEvent<HTMLTextAreaElement>
+      | ChangeEvent<HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -44,6 +46,28 @@ export const AddIssueForm: FC = () => {
   // If NEW project is chosen, handler will make 2 calls (1 to create project, 1 to create issue)
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    // if (showOption) {
+    //   try {
+    //     await axios.post('http://localhost:8000/api/projects/create', {
+    //       name: formData.project,
+    //       // add user here once projectOwner is added to Project model
+    //     }).then((res) => {
+    //       axios.post()
+    //     })
+    //   } catch (err) {
+
+    //   }
+    // }
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/api/issues/create",
+        formData
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // FETCHING THE CURRENTLY EXISTING PROJECTS VIA useEffect HOOK
@@ -69,7 +93,7 @@ export const AddIssueForm: FC = () => {
   return (
     <div className="issue-form-container">
       <h2>Add New Issue</h2>
-      <form action="">
+      <form onSubmit={handleSubmit} action="">
         <label htmlFor="project">Which project is this issue part of?</label>
         <select
           id="project"
@@ -80,29 +104,29 @@ export const AddIssueForm: FC = () => {
             else setShowOption(false);
           }}
         >
+          <option value="">  --Choose a project--  </option>
           {projects.map((proj) => (
-            <option key={proj._id} value={formData.project}>
+            <option key={proj._id} value={proj.name}>
               {proj.name}
             </option>
           ))}
           <option value="new">New Project</option>
         </select>
         {showOption && (
-          <>
-            <input
-              className="input"
-              id="project"
-              value={formData.project}
-              type="text"
-              // onChange={(e) => setProject(e.target.value)} -- NOT NEEDED
-              onChange={handleChange}
-              placeholder="Enter New Project"
-              required
-            />
-          </>
+          <input
+            className="issue-form-input"
+            id="project"
+            value={formData.project}
+            type="text"
+            onChange={handleChange}
+            placeholder="Enter New Project"
+            required
+            name="project"
+          ></input>
         )}
         <input
           type="text"
+          className="issue-form-input"
           name="title"
           value={formData.title}
           onChange={handleChange}
@@ -115,17 +139,21 @@ export const AddIssueForm: FC = () => {
           onChange={handleChange}
           name="description"
         />
-        <select id="priority">
-          <option value="low">Low</option>
-          <option selected value="medium">
+        <select name="priority" onChange={handleChange} id="priority">
+          <option name="priority" value="low">
+            Low
+          </option>
+          <option name="priority" value="medium">
             Medium
           </option>
-          <option value="high">High</option>
-          <option value="critical">Critical</option>
+          <option name="priority" value="high">
+            High
+          </option>
+          <option name="priority" value="critical">
+            Critical
+          </option>
         </select>
-        <button onSubmit={handleSubmit} type="submit">
-          Add Issue
-        </button>
+        <button type="submit">Add Issue</button>
       </form>
     </div>
   );
