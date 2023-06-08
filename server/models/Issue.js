@@ -31,30 +31,18 @@ const IssueSchema = new Schema(
       required: [true, "Priority is Required!"],
       default: "Normal",
     },
-    assignedUser: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-    reportedUser: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-    linkedIssues: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Issue",
-      },
-    ],
-    watchers: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
-    project: {
-      type: Schema.Types.ObjectId,
-      ref: "Project",
-    },
+ 
+  assignedUser: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+  reportedUser: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+  project: {
+    type: Schema.Types.ObjectId,
+    ref: "Project",
   },
   {
     timestamps: true,

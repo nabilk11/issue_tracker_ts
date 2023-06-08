@@ -24,12 +24,6 @@ const ProjectSchema = new Schema(
         ref: "User",
       },
     ],
-    admins: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
   },
   {
     timestamps: true,
