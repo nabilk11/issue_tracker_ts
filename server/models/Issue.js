@@ -38,18 +38,6 @@ const IssueSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
-  linkedIssues: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Issue",
-    },
-  ],
-  watchers: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
   project: {
     type: Schema.Types.ObjectId,
     ref: "Project",

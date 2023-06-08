@@ -43,21 +43,47 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Get User's Assigned Issues
+router.get("/:user_id/assignedIssues", async (req, res) => {
+  const { user_id } = req.params;
+  try {
+    const assignedIssues = await Issue.where("assignedUser").equals(user_id);
+    return res.status(200).json(assignedIssues);
+  } catch (err) {
+    console.log(`${err}`);
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+// Get User's Reported Issues
+router.get("/:user_id/reportedIssues", async (req, res) => {
+  const { user_id } = req.params;
+  try {
+    const reportedIssues = await Issue.where("reportedUser").equals(user_id);
+    return res.status(200).json(reportedIssues);
+  } catch (err) {
+    console.log(`${err}`);
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+
 // Create Issue
 router.post("/", async (req, res) => {
-  const { description, issue, project, title, reportedUser, assignedUser } =
+  const { description, project, title, reportedUser, assignedUser } =
     req.body;
-
   try {
     const newIssue = new Issue({
       title,
       description,
-      issue,
       project,
       reportedUser,
       assignedUser,
     });
     const result = await newIssue.save();
+    const projResult = await Project.findById(project);
+    projResult.issues.push(result._id);
+    await projResult.save();
     return res.status(201).json({ ...result._doc });
   } catch (err) {
     console.log(`${err}`);

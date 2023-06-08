@@ -15,7 +15,7 @@ const Navbar = (): JSX.Element => {
         {/* change these to links with react-router-dom */}
         <div className="left-side">
           <Link
-            to={"/"}
+            to={"/dashboard"}
             style={{ textDecoration: "none" }}
             className="navbar-brand"
           >
