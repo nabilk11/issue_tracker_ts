@@ -17,18 +17,22 @@ const ProjectSchema = new Schema({
       ref: "Issue",
     },
   ],
-  users: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
-  admins: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
+
+  description: {
+    type: String,
+  }
+  // users: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: "User",
+  //   },
+  // ],
+  // admins: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: "User",
+  //   },
+  // ],
 });
 
 const Project = mongoose.model("Project", ProjectSchema);
