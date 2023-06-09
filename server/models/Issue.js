@@ -1,6 +1,22 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
+const commentSchema = new Schema(
+  {
+    body: {
+      type: String,
+      required: true,
+    },
+    commentingUser: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const IssueSchema = new Schema(
   {
     title: {
@@ -11,38 +27,31 @@ const IssueSchema = new Schema(
       type: String,
       required: [true, "Description is Required!"],
     },
-    comments: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Comment",
-        ref: "User",
-      },
-    ],
-    // open, complete,  inProgress, , onHold, closed,
+    comments: [commentSchema],
+
     status: {
       type: String,
       required: [true, "Status is Required!"],
       default: "Open",
     },
-    // low, medium, high, critical
-    // or maybe numerical... 1 - 5?
+
     priority: {
       type: String,
       required: [true, "Priority is Required!"],
       default: "Normal",
     },
- 
-  assignedUser: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-  reportedUser: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-  project: {
-    type: Schema.Types.ObjectId,
-    ref: "Project",
+    assignedUser: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    reportedUser: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    project: {
+      type: Schema.Types.ObjectId,
+      ref: "Project",
+    },
   },
   {
     timestamps: true,
