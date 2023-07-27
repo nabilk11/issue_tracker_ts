@@ -17,6 +17,7 @@ export const AddIssueForm: FC = () => {
     title: "",
     description: "",
     priority: "",
+    newProject: false,
     status: "Open",
     reportedUser: reportingUser._id, //logged in user's id
     project: "",
@@ -27,6 +28,7 @@ export const AddIssueForm: FC = () => {
 
   // NEW PROJECT STATE
   const [newProject, setNewProject] = useState<unknown>("");
+  const [selectedProject, selectProject] = useState<unknown>("");
 
   // PROJECT FIELD SHO/ HIDE STATE
   const [showOption, setShowOption] = useState(false);
@@ -38,6 +40,7 @@ export const AddIssueForm: FC = () => {
       | ChangeEvent<HTMLTextAreaElement>
       | ChangeEvent<HTMLSelectElement>
   ) => {
+
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -46,22 +49,9 @@ export const AddIssueForm: FC = () => {
   // If NEW project is chosen, handler will make 2 calls (1 to create project, 1 to create issue)
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
-    // if (showOption) {
-    //   try {
-    //     await axios.post('http://localhost:8000/api/projects/create', {
-    //       name: formData.project,
-    //       // add user here once projectOwner is added to Project model
-    //     }).then((res) => {
-    //       axios.post()
-    //     })
-    //   } catch (err) {
-
-    //   }
-    // }
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/issues/create",
+        "http://localhost:8000/api/issues/",
         formData
       );
       console.log(res);
@@ -72,7 +62,7 @@ export const AddIssueForm: FC = () => {
 
   // FETCHING THE CURRENTLY EXISTING PROJECTS VIA useEffect HOOK
   useEffect(() => {
-    fetchProjects();
+    fetchProjects()
   }, []);
 
   async function fetchProjects() {
@@ -89,6 +79,7 @@ export const AddIssueForm: FC = () => {
       // need to add toast message for error
     }
   }
+  
 
   return (
     <div className="issue-form-container">
@@ -100,13 +91,18 @@ export const AddIssueForm: FC = () => {
           name="project"
           onChange={(e) => {
             setNewProject(e.target.value);
-            if (e.target.value == "new") setShowOption(true);
+            
+            handleChange(e);
+            if (e.target.value == "new") {
+              setShowOption(true);
+              setFormData({ ...formData, newProject: true });
+            }
             else setShowOption(false);
           }}
         >
           <option value="">  --Choose a project--  </option>
           {projects.map((proj) => (
-            <option key={proj._id} value={proj.name}>
+            <option id={proj._id} value={proj.name}>
               {proj.name}
             </option>
           ))}

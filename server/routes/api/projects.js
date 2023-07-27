@@ -11,7 +11,6 @@ router.get("/", async (req, res) => {
   try {
     const projects = await Project.find()
       .populate("users")
-      .populate("admins")
       .populate("issues")
       .exec();
 
