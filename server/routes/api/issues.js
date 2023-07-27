@@ -67,12 +67,23 @@ router.get("/:user_id/reportedIssues", async (req, res) => {
   }
 });
 
-
 // Create Issue
 router.post("/", async (req, res) => {
-  const { description, project, title, reportedUser, assignedUser } =
-    req.body;
+  let { description, project, title, reportedUser, assignedUser, newProject} = req.body;
+  
   try {
+    let projResult;
+    
+    if (newProject === true) {
+      const newProjectInstance = new Project({ name: project });
+
+      projResult = await newProjectInstance.save();
+      project = projResult._id;
+    } else {
+      projResult = await Project.findOne({ name: project });
+      project = projResult._id;
+    }
+    
     const newIssue = new Issue({
       title,
       description,
@@ -80,11 +91,13 @@ router.post("/", async (req, res) => {
       reportedUser,
       assignedUser,
     });
+
     const result = await newIssue.save();
-    const projResult = await Project.findById(project);
     projResult.issues.push(result._id);
     await projResult.save();
+
     return res.status(201).json({ ...result._doc });
+    
   } catch (err) {
     console.log(`${err}`);
     return res.status(500).json({ error: err.message });

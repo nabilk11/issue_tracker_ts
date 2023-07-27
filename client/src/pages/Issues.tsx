@@ -37,12 +37,13 @@ const Issues: FC = () => {
       <header className="issues-header">
         <h2 className="header-text">All Issues</h2>
       </header>
-      <div className="issues-table-container">
-        <IssueTable issues={issues} />
-      </div>
       <div className="add-issue-container">
         <AddIssueForm />
       </div>
+      <div className="issues-table-container">
+        <IssueTable issues={issues} />
+      </div>
+      
     </div>
   );
 };
